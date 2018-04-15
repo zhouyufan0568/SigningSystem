@@ -1,0 +1,49 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Staff Check Info Page</title>
+</head>
+<body>
+	<div>
+    	<input type="date" class="form-control" id="date" />
+    	<button type="button" onclick="searchCheckInfo()">查询</button>
+    </div>
+    <div>
+    	<table>
+    		<tr>
+    			<th>ID</th>
+    			<th>SIGN IN</th>
+    			<th>SIGN OUT</th>
+    		</tr>
+    	</table>
+    </div>
+    <script type="text/javascript">
+    	function searchCheckInfo(){
+    		var date;
+    		date = $("#date").val();
+    		jQuery.ajax({  
+            	url:"<%=request.getContextPath()%>/servlet/SearchServlet", //这里是传入的 servlet  
+            	type:"post",  
+            	data:{"date":date},  //这里是传进去的参数  
+            	dataType:"json",  
+            	success:function(json){   //这个json是servlet川归来的 json   ， 并且接到json  
+                    showCheckInfo(json);   //将json传给 dataShow方法   
+            	}
+    		});
+    	}
+    	
+    	function showCheckInfo(data){
+    		var checkInfo = data.checkInfo;
+    		if(checkInfo.length > 0){
+    			for(var i = 0; i < checkInfo.length; i++){
+    				
+    			}
+    		}
+    	}
+    
+    </script>
+</body>
+</html>

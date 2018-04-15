@@ -1,0 +1,18 @@
+package global;
+
+public class CheckInfo {
+	
+	private String id = null;
+	private String date = null;
+	private String signin = null;
+	private String signout = null;
+
+	public CheckInfo(String id, String date, String signin, String signout) {
+		// TODO Auto-generated constructor stub
+		this.id = id;
+		this.date = date;
+		this.signin = signin;
+		this.signout = signout;
+	}
+
+}

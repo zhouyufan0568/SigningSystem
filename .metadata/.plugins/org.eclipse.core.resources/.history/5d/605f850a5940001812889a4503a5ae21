@@ -1,0 +1,9 @@
+package global;
+
+public class CheckInfo {
+
+	public CheckInfo() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

@@ -1,0 +1,58 @@
+package servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import global.CheckInfo;
+import service.MyService;
+
+public class SearchServlet extends HttpServlet {
+	public SearchServlet() {  
+        super();  
+    }  
+  
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)   
+            throws ServletException, IOException {  
+        doPost(request, response);    
+        response.getWriter().append("Served at: ").append(request.getContextPath());  
+    }  
+      
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)   
+            throws ServletException, IOException { 
+    	//返回链表
+    	List<CheckInfo> list = null; 
+        // 输出流    
+        PrintWriter out = response.getWriter();    
+        // 设置编码形式    
+        request.setCharacterEncoding("utf-8");      
+        // 获取传入数据    
+        String date = request.getParameter("date");    
+        System.out.println("date:" + date + " --try to search check info");  
+        
+        // 访问数据库    
+        list = MyService.search(date);
+        if(!list.isEmpty()) {
+        	System.out.println("search servlet responseMsg: SUCCEEDED"); 
+        	String recomPadata = new ObjectMapper().writeValueAsString(list);
+            JSONObject json = new JSONObject();//创建json  
+            json.put("recomPadata", recomPadata);//存入json  
+            out.print(json);//传回前端 jsp     json格式  
+            out.flush();  
+            out.close();//关闭sevlet    
+        }else {
+        	System.out.println("search servlet responseMsg: FAILED"); 
+        }
+           
+        out.print(responseMsg);  
+    }  
+}

@@ -1,0 +1,81 @@
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+    <html>
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Staff Check Info Page</title>
+        <script src="./plugins/jquery.min.js"></script>
+    </head>
+
+    <body>
+        <div>
+            <input type="date" class="form-control" id="date" />
+            <button type="button" onclick="searchCheckInfo()">查询</button>
+        </div>
+        <div>
+            <table id="checkTab">
+                <tr>
+                    <th>ID</th>
+                    <th>SIGN IN</th>
+                    <th>SIGN OUT</th>
+                </tr>
+            </table>
+        </div>
+        <script type="text/javascript">
+            function searchCheckInfo() {
+                var dateTemp;
+                var dateTemp = $("#date").val();
+                var dateArray = dateTemp.split("-");
+                var month = parseInt(dateArray[1]);
+                var day = parseInt(dateArray[2]);
+                var date = dateArray[0].concat("/", month.toString(), "/", day.toString());
+                console.log("date info:" + date);
+                var table = document.getElementById("checkTab");
+                var tableChilds = table.childNodes;
+                for (var i = 1; i < tableChilds.length; i++) {
+                    table.removeChild(tableChilds[i]);
+                }
+
+                jQuery.ajax({
+                    url: "<%=request.getContextPath()%>/SearchServlet", //这里是传入的 servlet  
+                    type: "post",
+                    data: {
+                        "date": date
+                    }, //这里是传进去的参数  
+                    dataType: "json",
+                    success: function(json) { //这个json是servlet川归来的 json   ， 并且接到json  
+                        showCheckInfo(json); //将json传给 dataShow方法   
+                    }
+                });
+            }
+
+            function showCheckInfo(data) {
+                var checkInfo = data.checkInfo;
+                console.log("checkInfo info:" + checkInfo);
+                console.log("checkInfo.length info:" + checkInfo.length);
+                var table = document.getElementById("checkTab");
+                if (checkInfo.length > 0) {
+                    for (var i = 0; i < checkInfo.length; i++) {
+                        var rowInfo = checkInfo[i];
+                        var tr = document.createElement("tr");
+                        var td = new Array();
+                        for (var j = 0; j < 4; j++) {
+                            td[j] = document.createElement("td");
+                        }
+                        td[0].innerHTML = rowInfo.id;
+                        td[1].innerHTML = rowInfo.date;
+                        td[2].innerHTML = rowInfo.signin;
+                        td[3].innerHTML = rowInfo.signout;
+                        for (var j = 0; j < 4; j++) {
+                            tr.appendChild(td[j]);
+                        }
+                        table.appendChild(tr);
+                    }
+                }
+            }
+        </script>
+    </body>
+
+    </html>

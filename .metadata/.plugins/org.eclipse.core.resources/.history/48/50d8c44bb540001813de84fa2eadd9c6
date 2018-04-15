@@ -1,0 +1,57 @@
+package servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.JSONObject;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import global.CheckInfo;
+import service.MyService;
+import sun.misc.CharacterEncoder;
+
+public class SearchServlet extends HttpServlet {
+	public SearchServlet() {  
+        super();  
+    }  
+  
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)   
+            throws ServletException, IOException {  
+        doPost(request, response);    
+        response.getWriter().append("Served at: ").append(request.getContextPath());  
+    }  
+      
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)   
+            throws ServletException, IOException { 
+    	List<CheckInfo> list = null; 
+        // 输出流    
+        PrintWriter out = response.getWriter();    
+        // 设置编码形式    
+        request.setCharacterEncoding("utf-8");      
+        // 获取传入数据    
+        String date = request.getParameter("date");    
+        System.out.println("date:" + date + " --try to search check info");  
+        
+        // 访问数据库    
+        list = MyService.search(date);
+        JSONObject json = new JSONObject();
+        if(!list.isEmpty()) {
+        	System.out.println("search servlet response: NOT NULL"); 
+        	String checkInfo = new ObjectMapper().writeValueAsString(list);
+            json.put("checkInfo", checkInfo);  
+            System.out.println("checkInfo:" + checkInfo);
+        }else {
+        	System.out.println("search servlet response: NULL"); 
+        }
+        out.print(json);
+        out.flush();  
+        out.close(); 
+    }  
+}
