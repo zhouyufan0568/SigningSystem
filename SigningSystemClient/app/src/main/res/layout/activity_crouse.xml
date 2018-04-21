@@ -1,0 +1,477 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/classSchedule"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:background="#80ffffff"
+        android:text="物联网工程课程表"
+        android:gravity="center"
+        android:textColor="#a4c2f4"
+        android:textSize="16sp" />
+    <!--第一行  -->
+    <LinearLayout
+        android:id="@+id/weekLine"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:background="#00000000"
+        android:layout_below="@+id/classSchedule"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="      "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="星期一"
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="星期二"
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="星期三"
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="星期四"
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="星期五"
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/index1"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:background="#00000000"
+        android:layout_below="@+id/weekLine"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="  1  "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse11"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse21"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse31"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse41"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse51"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/index2"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:layout_below="@+id/index1"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="  2  "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse12"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse22"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse32"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse42"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse52"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/index3"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:layout_below="@+id/index2"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="  3  "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse13"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse23"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse33"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse43"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse53"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/index4"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:layout_below="@+id/index3"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="  4  "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse14"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse24"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse34"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse44"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse54"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/index5"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:layout_below="@+id/index4"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="  5  "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse15"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse25"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse35"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse45"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse55"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/index6"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:layout_below="@+id/index5"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="  6  "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse16"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse26"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse36"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse46"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse56"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/index7"
+        android:layout_width="fill_parent"
+        android:layout_height="20dp"
+        android:background="#00000000"
+        android:orientation="horizontal"
+        android:layout_below="@+id/index6"
+        android:layout_alignParentStart="true">
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="  7  "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse17"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse27"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse37"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse47"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+
+        <TextView
+            android:id="@+id/crouse57"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="     "
+            android:background="@drawable/textview_border"/>
+    </LinearLayout>
+
+</RelativeLayout>

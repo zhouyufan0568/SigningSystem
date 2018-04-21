@@ -1,0 +1,15 @@
+body {
+	margin: 0px; padding: 20px; font-family: verdana,helvetica,arial,sans-serif; font-size: 12px;
+}
+h2 {
+	margin: 0px 0px 15px; font-size: 18px; font-weight: bold;
+}
+.demo-info {
+	padding: 0px 0px 12px;
+}
+.demo-tip {
+	display: none;
+}
+.label-top {
+	height: 22px; line-height: 22px; vertical-align: middle; display: block;
+}

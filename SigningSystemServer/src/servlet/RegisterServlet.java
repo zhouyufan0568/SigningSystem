@@ -40,13 +40,14 @@ public class RegisterServlet extends HttpServlet {
         // 设置编码形式    
         request.setCharacterEncoding("utf-8");      
         // 获取传入数据    
+        String usertype = request.getParameter("usertype");
         String id = request.getParameter("id");
         String username = request.getParameter("username");  
         String password = request.getParameter("password");  
         System.out.println("id:" + id + " --try to register");  
     
         // 访问数据库    
-        int value = MyService.register(id, username, password);  
+        int value = MyService.register(id, username, password, usertype);  
         if(value == REGISTER_SUCCEEDED) {    
             responseMsg = "SUCCEEDED";    
         }  

@@ -117,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("id", id));
                 params.add(new BasicNameValuePair("password", password));
+                params.add(new BasicNameValuePair("usertype", "user"));
                 // 发送数据，获取对象
                 responseInt = LoginPostService.send(params);
                 Log.i("tag", "LoginActivity: responseInt = " + responseInt);

@@ -1,0 +1,9 @@
+package global;
+
+public class ScheduleInfo {
+
+	public ScheduleInfo() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

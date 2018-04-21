@@ -39,12 +39,13 @@ public class LoginServlet extends HttpServlet {
         // 设置编码形式    
         request.setCharacterEncoding("utf-8");      
         // 获取传入数据    
+        String usertype = request.getParameter("usertype");
         String id = request.getParameter("id");    
         String password = request.getParameter("password");  
         System.out.println("id:" + id + " --try to login");  
     
         // 访问数据库    
-        int value = MyService.login(id, password);  
+        int value = MyService.login(id, password, usertype);  
         if(value == LOGIN_SUCCEEDED) {    
             responseMsg = "SUCCEEDED";    
         }  

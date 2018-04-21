@@ -3,5 +3,9 @@
 <fullyQualifiedTypeName name="com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
+<fullyQualifiedTypeName name="sun.misc.CharacterEncoder"/>
 <fullyQualifiedTypeName name="global.CheckInfo"/>
+<fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

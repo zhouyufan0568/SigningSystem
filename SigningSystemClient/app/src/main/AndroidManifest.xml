@@ -20,6 +20,7 @@
         <activity android:name=".RegisterActivity"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".SignActivity"/>
+        <activity android:name=".CrouseActivity"/>
     </application>
 
 </manifest>

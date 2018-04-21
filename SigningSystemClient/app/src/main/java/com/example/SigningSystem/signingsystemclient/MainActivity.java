@@ -13,18 +13,29 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     Button sign;
+    Button myCrouse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         sign = (Button)findViewById(R.id.sign);
+        myCrouse = (Button)findViewById(R.id.mycrouse);
 
         sign.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Intent intent = new Intent(MainActivity.this,
                         SignActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        myCrouse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v){
+                Intent intent = new Intent(MainActivity.this,
+                        CrouseActivity.class);
                 startActivity(intent);
             }
         });
