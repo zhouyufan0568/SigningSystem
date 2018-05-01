@@ -170,7 +170,7 @@ pageEncoding="utf-8"%>
                         success: function(data) {
                             if (data == "SUCCEEDED")
                                 sessionStorage.id = id;
-                            window.location.href = "http://localhost:5716/SigningSystemServer/CheckInfo.jsp";
+                            window.location.href = "http://localhost:5716/SigningSystemServer/Main.jsp";
                         }
                     });
                 }

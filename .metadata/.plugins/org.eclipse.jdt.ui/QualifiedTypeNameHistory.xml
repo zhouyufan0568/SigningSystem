@@ -3,9 +3,18 @@
 <fullyQualifiedTypeName name="com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException"/>
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="org.json.JSONObject"/>
 <fullyQualifiedTypeName name="com.fasterxml.jackson.databind.ObjectMapper"/>
 <fullyQualifiedTypeName name="sun.misc.CharacterEncoder"/>
 <fullyQualifiedTypeName name="global.CheckInfo"/>
+<fullyQualifiedTypeName name="org.json.JSONObject"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="java.util.LinkedList"/>
+<fullyQualifiedTypeName name="global.ScheduleInfo"/>
+<fullyQualifiedTypeName name="org.apache.catalina.util.URLEncoder"/>
+<fullyQualifiedTypeName name="java.net.URLEncoder"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
+<fullyQualifiedTypeName name="sun.security.provider.JavaKeyStore.CaseExactJKS"/>
 </qualifiedTypeNameHistroy>
