@@ -360,7 +360,7 @@ pageEncoding="utf-8"%>
                                     <td colspan=7 align="center">午间休息</td>
                                 </tr>
                                 <tr>
-                                    <td rowspan=3 class="time">下午</td>
+                                    <td rowspan=4 class="time">下午</td>
                                     <td class="cindex">5</td>
 
                                     <td class="crouse drop"></td>
@@ -384,6 +384,43 @@ pageEncoding="utf-8"%>
                                 </tr>
                                 <tr>
                                     <td class="cindex">7</td>
+
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td class="cindex">8</td>
+
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td colspan=7 align="center">晚间休息</td>
+                                </tr>
+                                <tr>
+                                    <td rowspan=2 class="time">晚上</td>
+                                    <td class="cindex">9</td>
+
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+                                    <td class="crouse drop"></td>
+
+
+                                </tr>
+                                <tr>
+                                    <td class="cindex">10</td>
 
                                     <td class="crouse drop"></td>
                                     <td class="crouse drop"></td>
