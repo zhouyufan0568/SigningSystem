@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EBEBEB"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="144dp"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:paddingLeft="12dp" >
+
+            <ImageView
+                android:id="@+id/re_major_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/icon_major" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+            	android:layout_marginLeft="20dp"
+            	android:layout_toRightOf="@id/re_major_icon"
+                android:text="选择专业"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <Spinner
+            android:id="@+id/sp_major"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/relativeLayout1"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/slt_major" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/btn_list_item_bg"
+            android:clickable="true"
+            android:paddingLeft="12dp" >
+
+            <ImageView
+                android:id="@+id/re_class_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:src="@drawable/icon_class" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/re_class_icon"
+                android:text="选择课程"
+                android:textColor="#000000"
+                android:textSize="20sp" />
+        </RelativeLayout>
+
+        <Spinner
+            android:id="@+id/sp_class"
+            android:layout_width="230dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/relativeLayout2"
+            android:layout_centerHorizontal="true"
+            android:entries="@array/slt_class" />
+
+        <Button
+            android:id="@+id/btn_slt_class"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/sp_class"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="23dp"
+            android:onClick="onClicked"
+            android:text="选择" />
+
+    </RelativeLayout>
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical" >
+
+    </RelativeLayout>
+
+</LinearLayout>

@@ -41,7 +41,11 @@ public class CrouseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crouse);
         classSchedule = (TextView)findViewById(R.id.classSchedule);
-
+        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+        String myclass = sharedPreferences.getString("class", "");
+        if (myclass != "") {
+            classSchedule.setText(myclass);
+        }
         dialog = new Dialog(CrouseActivity.this);
         dialog.setTitle("正在获取课表...");
         dialog.setCancelable(false);

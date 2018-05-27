@@ -27,4 +27,26 @@ public class GetCrousePostServer {
     }
         return responseMsg;
     }
+
+    public static String getInfo(List<NameValuePair> params) {
+        // 定位服务器的Servlet
+        String servlet = "SearchInfoServlet";
+        // 通过 POST 方式获取 HTTP 服务器数据
+        String responseMsg = null;
+        responseMsg = MyHttpPost.executeHttpPost(servlet, params);
+        Log.i("tag", "SearchInfoService: responseMsg = " + responseMsg);
+
+        return responseMsg;
+    }
+
+    static String sendInfo(List<NameValuePair> params) {
+        // 定位服务器的Servlet
+        String servlet = "SendInfoServlet";
+        // 通过 POST 方式获取 HTTP 服务器数据
+        String responseMsg = null;
+        responseMsg = MyHttpPost.executeHttpPost(servlet, params);
+        Log.i("tag", "SendInfoService: responseMsg = " + responseMsg);
+
+        return responseMsg;
+    }
 }

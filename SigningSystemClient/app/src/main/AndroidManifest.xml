@@ -18,9 +18,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".RegisterActivity"/>
-        <activity android:name=".MainActivity"/>
+        <activity android:name=".IndexActivity"/>
         <activity android:name=".SignActivity"/>
         <activity android:name=".CrouseActivity"/>
+        <activity android:name=".UpdateInfoActivity"/>
     </application>
 
 </manifest>

@@ -1,0 +1,13 @@
+package servlet;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet("/SearchInfoServlet")
+public class SearchInfoServlet extends HttpServlet {
+
+	public SearchInfoServlet() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

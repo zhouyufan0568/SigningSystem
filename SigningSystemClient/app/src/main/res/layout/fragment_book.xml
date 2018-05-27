@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+
+        <RelativeLayout
+            android:id="@+id/rl_book1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.42"
+            android:background="@color/yellow"
+            android:onClick="onClicked"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text=" 高数  "
+                android:textColor="#000000"
+                android:textSize="30sp" />
+
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/rl_book2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.42"
+            android:background="@color/red"
+            android:orientation="vertical"
+            android:onClick="onClicked" >
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="概率论"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+            
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        
+        <RelativeLayout
+            android:id="@+id/rl_book3"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.47"
+            android:background="@color/blue"
+            android:orientation="vertical"
+            android:onClick="onClicked" >
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="线性代数"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+            
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/rl_book4"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:orientation="vertical"
+            android:background="@color/black"
+            android:onClick="onClicked" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="操作系统"
+                android:textColor="#EBEBEB"
+                android:textSize="30sp" />
+            
+        </RelativeLayout>
+        
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="horizontal" >
+        
+        <RelativeLayout
+            android:id="@+id/rl_book5"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.48"
+            android:background="@color/red"
+            android:onClick="onClicked"
+            android:orientation="vertical" >
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="信息安全"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+            
+        </RelativeLayout>
+        
+        <RelativeLayout
+            android:id="@+id/rl_book6"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.50"
+            android:orientation="vertical"
+            android:background="@color/yellow"
+            android:onClick="onClicked" >
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="数据结构"
+                android:textColor="#000000"
+                android:textSize="30sp" />
+            
+        </RelativeLayout>
+        
+    </LinearLayout>
+
+</LinearLayout>

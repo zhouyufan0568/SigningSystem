@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="slt_major">
+        <item>网络工程</item>
+        <item>信息安全</item>
+        <item>软件工程</item>
+    </string-array>
+    
+    <string-array name="slt_class">
+        <item>高等数学</item>
+        <item>概率论</item>
+        <item>线性代数</item>
+        <item>程序设计</item>
+        <item>数据结构</item>
+        <item>操作系统</item>
+    </string-array>
+</resources>

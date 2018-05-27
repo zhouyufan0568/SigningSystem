@@ -2,6 +2,8 @@ package com.example.SigningSystem.signingsystemclient;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -28,6 +30,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button loginBtn;
     //Button returnBtn;
     EditText password2, username;
+    String response;
     Dialog dialog;
     Handler handler;
     static int LOGIN_FAILED = 0;
@@ -39,12 +42,12 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-        id = (EditText)findViewById(R.id.id);
-        password = (EditText)findViewById(R.id.password);
-        password2 = (EditText)findViewById(R.id.password2);
-        username = (EditText)findViewById(R.id.username);
-        loginBtn = (Button)findViewById(R.id.loginBtn);
+        setContentView(R.layout.activity_user_register);
+        id = (EditText)findViewById(R.id.usernameRegister);
+        password = (EditText)findViewById(R.id.passwordRegister);
+        password2 = (EditText)findViewById(R.id.passwordRegister1);
+        username = (EditText)findViewById(R.id.et_usernick);
+        loginBtn = (Button)findViewById(R.id.Register);
         //returnBtn = (Button)findViewById(R.id.returnBtn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -79,9 +82,20 @@ public class RegisterActivity extends AppCompatActivity {
                 dialog.dismiss();
                 if (msg.what == 222) {  // 处理发送线程传回的消息
                     if(msg.obj.toString().equals("SUCCEEDED")){
-                        Log.i("tag", "注册模拟跳转");
-                        //跳转
-                        Toast.makeText(RegisterActivity.this, "模拟跳转", Toast.LENGTH_SHORT).show();
+                        String info = response.split(":")[1];
+                        String[] infos = info.split(",");
+                        SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
+                        editor.putString("id", infos[0]);
+                        editor.putString("username", infos[1]);
+                        editor.putString("sex", infos[2]);
+                        editor.putString("class", infos[3]);
+                        editor.commit();//提交修改
+
+                        /// /跳转
+                        Intent intent = new Intent(RegisterActivity.this,
+                                IndexActivity.class);
+                        startActivity(intent);
                     }else{
                         Toast.makeText(RegisterActivity.this, "网络貌似不通", Toast.LENGTH_SHORT).show();
                     }
@@ -113,25 +127,25 @@ public class RegisterActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            // Sevice传回int
-            int responseInt = 0;
+            response = null;
             if(!id.equals("")) {
                 // 要发送的数据
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
                 params.add(new BasicNameValuePair("id", id));
                 params.add(new BasicNameValuePair("username", username));
                 params.add(new BasicNameValuePair("password", password));
+                params.add(new BasicNameValuePair("usertype", "user"));
                 // 发送数据，获取对象
-                responseInt = RegisterPostService.send(params);
-                Log.i("tag", "RegisterActivity: responseInt = " + responseInt);
+                response = RegisterPostService.send(params);
+                Log.i("tag", "RegisterActivity: response = " + response);
                 // 准备发送消息
                 Message msg = handler.obtainMessage();
                 // 设置消息默认值
                 msg.what = 222;
                 // 服务器返回信息的判断和处理
-                if(responseInt == REGISTER_FAILED) {
+                if(response.split(":")[1].equals("null")) {
                     msg.obj = "FAILED";
-                }else if(responseInt == REGISTER_SUCCEEDED) {
+                }else {
                     msg.obj = "SUCCEEDED";
                 }
                 handler.sendMessage(msg);

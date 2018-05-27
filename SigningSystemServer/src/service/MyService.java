@@ -31,8 +31,10 @@ public class MyService {
 	static int SAVECROUSE_SUCCEEDED = 7;
 	static int GETCROUSE_FAILED = 8;  
     static int GETCROUSE_SUCCEEDED = 9;
+    static int SETINFO_SUCCEEDED = 10;
+    static int SETINFO_FAILED = 11;
 
-	public static int login(String id, String password, String usertype) {
+	public static String login(String id, String password, String usertype) {
 		int result = LOGIN_FAILED;
 		resultSet = null;
 		// 执行 SQL 查询语句
@@ -70,23 +72,28 @@ public class MyService {
 			e.printStackTrace();
 		}
 		System.out.println("login service result:" + result);
-		return result;
+		
+		String res = null;
+		if(result == LOGIN_SUCCEEDED) {
+			res = getInfo(id, usertype);
+		}
+		return res;
 	}
 
-	public static int register(String id, String username, String password, String usertype) {
+	public static String register(String id, String username, String password, String sex, String usertype) {
 		int result = REGISTER_FAILED;
 		updateRowCnt = 0;
 		// 执行 SQL 插入语句
 		String sql = null;
 		switch (usertype) {
 		case "manager":
-			sql = "insert into manager_list(`id`, `username`,`password`) values ('" + id + "', '" + username + "', '"
-					+ password + "')";
+			sql = "insert into manager_list(`id`, `username`,`password`, `sex`) values ('" + id + "', '" + username + "', '"
+					+ password  + "', '" + sex + "')";
 			break;
 
 		default:
-			sql = "insert into user_list(`id`, `username`,`password`) values ('" + id + "', '" + username + "', '"
-					+ password + "')";
+			sql = "insert into user_list(`id`, `username`,`password`, `sex`) values ('" + id + "', '" + username + "', '"
+					+ password  + "', '" + sex + "')";
 			break;
 		}
 		try {
@@ -97,7 +104,7 @@ public class MyService {
 				// 插入结果
 				if (updateRowCnt != 0) {
 					result = REGISTER_SUCCEEDED;
-					System.out.println(usertype + " " + "id:" + id + " username:" + username + " --register");
+					System.out.println(usertype + " " + "id:" + id + " username:" + username + " sex:" + sex + " --register");
 				}
 				preparedStatement.close();
 				con.close();
@@ -108,7 +115,12 @@ public class MyService {
 			e.printStackTrace();
 		}
 		System.out.println("register service result:" + result);
-		return result;
+		
+		String res = null;
+		if(result == REGISTER_SUCCEEDED) {
+			res = getInfo(id, usertype);
+		}
+		return res;
 	}
 
 	public static int sign(String id, String time, String sign) {
@@ -245,5 +257,166 @@ public class MyService {
 			e.printStackTrace();
 		}
 		return list;
+	}
+
+	public static String searchInfo(String id, String usertype, String info) {
+		// TODO Auto-generated method stub
+		StringBuilder res = new StringBuilder();
+		resultSet = null;
+		// 执行 SQL 插入语句
+		String sql = null;
+		switch (info) {
+			case "classname":{
+				sql = "select distinct class from class_schedule";
+				break;
+			}
+			case "username":{
+				if(usertype.equals("user")) {					
+					sql = "select username from user_list where id='" + id + "'";
+				}else {
+					sql = "select username from manager_list where id='" + id + "'";
+				}
+				break;
+			}
+			case "myclass":{
+				if(usertype.equals("user")) {					
+					sql = "select class from user_list where id='" + id + "'";
+				}else {
+					sql = "select class from manager_list where id='" + id + "'";
+				}
+				break;
+			}
+			default:{
+				sql = "select distinct class from class_schedule";
+				break;
+			}
+		}
+		try {
+			Connection con = DBManager.getConnection();
+			preparedStatement = con.prepareStatement(sql);
+			try {
+				resultSet = preparedStatement.executeQuery();
+				// 查询结果
+				while (resultSet.next()) {
+					switch (info) {
+						case "classname":{
+							res.append(resultSet.getString("class")+",");
+							System.out.println("Search 1 raw: classname: " + resultSet.getString("class"));
+							break;
+						}
+						case "username":{
+							res.append(resultSet.getString("username")+",");
+							if(usertype.equals("user")) {					
+								System.out.println("Search 1 raw: user id: " + id + " username: " + resultSet.getString("username"));
+							}else {
+								System.out.println("Search 1 raw: manager id: " + id + " username: " + resultSet.getString("username"));
+							}
+							break;
+						}
+						case "myclass":{
+							res.append(resultSet.getString("class")+",");
+							if(usertype.equals("user")) {					
+								System.out.println("Search 1 raw: user id: " + id + " class: " + resultSet.getString("class"));
+							}else {
+								System.out.println("Search 1 raw: manager id: " + id + " class: " + resultSet.getString("class"));
+							}
+							break;
+						}
+						default:
+							break;
+					}
+				}
+				res.setLength(res.length()-1);
+				System.out.println("SearchInfo res: "+res.toString());
+				preparedStatement.close();
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res.toString();
+	}
+
+	public static int setInfo(String id, String usertype, String username, String sex, String classname) {
+		// TODO Auto-generated method stub
+		int result = SETINFO_SUCCEEDED;
+		String sql = null;
+		try {
+			Connection con = DBManager.getConnection();
+			if(usertype.equals("user")) {
+				sql = "update user_list set username=?,sex=?,class=? where id=?";
+			}else {
+				sql = "update manager_list set username=?,sex=?,class=? where id=?";
+			}
+			preparedStatement = con.prepareStatement(sql);
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, sex);
+			preparedStatement.setString(3, classname);
+			preparedStatement.setString(4, id);
+			updateRowCnt = preparedStatement.executeUpdate();
+			System.out.println(sql);
+			// 插入结果
+			if (updateRowCnt != 0) {
+				System.out.println(usertype + " " + id + " -- has been modified");
+			} else {
+				result = SETINFO_FAILED;
+				System.out.println("Update failed -- mysql: update 0 raw");
+			}
+			preparedStatement.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
+	}
+	
+	public static String getInfo(String id, String usertype) {
+		// TODO Auto-generated method stub
+		String res = null;
+		resultSet = null;
+		// 执行 SQL 插入语句
+		String sql = null;
+		switch (usertype) {
+		case "user":{
+			sql = "select id,username,sex,class from user_list where id='" + id + "'";
+			break;
+		}
+		case "manager":{
+			sql = "select id,username,sex,class from manager_list where id='" + id + "'";
+			break;
+		}
+		default:
+			break;
+		}
+		try {
+			Connection con = DBManager.getConnection();
+			preparedStatement = con.prepareStatement(sql);
+			try {
+				resultSet = preparedStatement.executeQuery();
+				// 查询结果
+				while (resultSet.next()) {
+					res = resultSet.getString("id") + "," + resultSet.getString("username") + "," + resultSet.getString("sex") + "," + resultSet.getString("class");
+					if(usertype.equals("user")) {
+						System.out.println("Search 1 raw: user " + id + " info: " + res);
+					}else {
+						System.out.println("Search 1 raw: manager " + id + " info: " + res);
+					}
+				}
+				System.out.println("SearchInfo res: "+res);
+				preparedStatement.close();
+				con.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return res;
 	}
 }

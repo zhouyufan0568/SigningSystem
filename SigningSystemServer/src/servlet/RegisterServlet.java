@@ -34,8 +34,11 @@ public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)   
             throws ServletException, IOException {
         // 返回字符串    
-        String responseMsg="FAILED";    
+        String res = null;    
         // 输出流    
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
+    	response.setCharacterEncoding("UTF-8"); 
+    	response.setContentType("text/xml;charset=UTF-8");
         PrintWriter out = response.getWriter();    
         // 设置编码形式    
         request.setCharacterEncoding("utf-8");      
@@ -44,15 +47,19 @@ public class RegisterServlet extends HttpServlet {
         String id = request.getParameter("id");
         String username = request.getParameter("username");  
         String password = request.getParameter("password");  
+        String sex = request.getParameter("sex");  
         System.out.println("id:" + id + " --try to register");  
     
         // 访问数据库    
-        int value = MyService.register(id, username, password, usertype);  
-        if(value == REGISTER_SUCCEEDED) {    
-            responseMsg = "SUCCEEDED";    
-        }  
-        System.out.println("register servlet responseMsg:" + responseMsg);    
-        out.print(responseMsg);  
+        res = MyService.register(id, username, password, sex, usertype);  
+        if(res != null) {    
+        	System.out.println("login success");    
+        }else {
+        	System.out.println("login failed"); 
+        }
+        res = "loginInfo:" + res;
+        System.out.println("register servlet responseMsg:" + res);    
+        out.print(res);  
     }  
 
 }

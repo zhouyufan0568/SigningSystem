@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText id, password;
     Button loginBtn, registerBtn;
+    String response;
     Handler handler;
     static int LOGIN_FAILED = 0;
     static int LOGIN_SUCCEEDED = 1;
@@ -34,11 +35,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        id = (EditText)findViewById(R.id.id);
+        setContentView(R.layout.activity_user_login);
+        id = (EditText)findViewById(R.id.username);
         password = (EditText)findViewById(R.id.password);
-        loginBtn = (Button)findViewById(R.id.loginBtn);
-        registerBtn = (Button)findViewById(R.id.registerBtn);
+        loginBtn = (Button)findViewById(R.id.login);
+        registerBtn = (Button)findViewById(R.id.register);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,16 +80,19 @@ public class LoginActivity extends AppCompatActivity {
                 dialog.dismiss();
                 if (msg.what == 111) {  // 处理发送线程传回的消息
                     if(msg.obj.toString().equals("SUCCEEDED")){
-
+                        String info = response.split(":")[1];
+                        String[] infos = info.split(",");
                         SharedPreferences sharedPreferences = getSharedPreferences("UserInfo", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPreferences.edit();//获取编辑器
-                        editor.putString("id", id.getText().toString());
-                        editor.putString("password", password.getText().toString());
+                        editor.putString("id", infos[0]);
+                        editor.putString("username", infos[1]);
+                        editor.putString("sex", infos[2]);
+                        editor.putString("class", infos[3]);
                         editor.commit();//提交修改
 
                         /// /跳转
                         Intent intent = new Intent(LoginActivity.this,
-                                MainActivity.class);
+                                IndexActivity.class);
                         startActivity(intent);
                     }else{
                         Toast.makeText(LoginActivity.this, "账号和密码不匹配", Toast.LENGTH_SHORT).show();
@@ -110,8 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void run() {
-            // Sevice传回int
-            int responseInt = 0;
+            response= null;
             if(!id.equals("")) {
                 // 要发送的数据
                 List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -119,16 +122,16 @@ public class LoginActivity extends AppCompatActivity {
                 params.add(new BasicNameValuePair("password", password));
                 params.add(new BasicNameValuePair("usertype", "user"));
                 // 发送数据，获取对象
-                responseInt = LoginPostService.send(params);
-                Log.i("tag", "LoginActivity: responseInt = " + responseInt);
+                response = LoginPostService.send(params);
+                Log.i("tag", "LoginActivity: response = " + response);
                 // 准备发送消息
                 Message msg = handler.obtainMessage();
                 // 设置消息默认值
                 msg.what = 111;
                 // 服务器返回信息的判断和处理
-                if(responseInt == LOGIN_FAILED) {
+                if(response.split(":")[1].equals("null")) {
                     msg.obj = "FAILED";
-                }else if(responseInt == LOGIN_SUCCEEDED) {
+                }else {
                     msg.obj = "SUCCEEDED";
                 }
                 handler.sendMessage(msg);

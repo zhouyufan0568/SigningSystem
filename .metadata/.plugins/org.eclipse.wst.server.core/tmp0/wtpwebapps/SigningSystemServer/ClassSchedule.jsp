@@ -16,12 +16,47 @@ pageEncoding="utf-8"%>
                     if (sessionStorage.id == null) {
                         window.location.href = "http://localhost:5716/SigningSystemServer/Login.jsp";
                     }
-                    GetSchedule();
+                    GetClass();
+                    document.getElementById("crouselist").selectedIndex = sessionStorage.preCrouseIndex;
+                    GetCrouseList();
                     ChangeColor();
                 }
 
+                function GetClass() {
+                    jQuery.ajax({
+                        url: "<%=request.getContextPath()%>/SearchInfoServlet", //这里是传入的 servlet  
+                        type: "post",
+                        data: {
+                            info: "classname",
+                            id: sessionStorage.id,
+                            usertype: "manager",
+                        }, //这里是传进去的参数  
+                        dataType: "text",
+                        success: function(data) {
+                            setClass(data);
+                            document.getElementById("classlist").selectedIndex = sessionStorage.preSelectedIndex;
+                            GetSchedule();
+                        }
+                    });
+                }
+
+                function setClass(data) {
+                    var infos = data.split(":")[1];
+                    var info = infos.split(",");
+                    console.log(info);
+                    var list = document.getElementById("classlist");
+                    for (var t in info) {
+                        var option = document.createElement("option");
+                        option.innerHTML = info[t];
+                        list.appendChild(option);
+                    }
+                }
+
                 function GetSchedule() {
-                    var classname = document.getElementById("classname").innerText;
+                    var classlist = document.getElementById("classlist");
+                    var index = classlist.selectedIndex; // 选中索引
+                    var classname = classlist.options[index].text;
+                    document.getElementById("classname").innerHTML = classname;
                     jQuery.ajax({
                         url: "<%=request.getContextPath()%>/GetCrouseServlet", //这里是传入的 servlet  
                         type: "post",
@@ -38,10 +73,14 @@ pageEncoding="utf-8"%>
 
                 function ShowSchedule(data) {
                     console.log(data);
+
                     var scheduleInfo = eval(data.scheduleInfo);
                     if (scheduleInfo != undefined) {
                         console.log("scheduleInfo.length info:" + scheduleInfo.length);
                         var crouse = document.getElementsByClassName("crouse");
+                        for (var i in crouse) {
+                            crouse[i].textContent = "";
+                        }
                         for (var i in scheduleInfo) {
                             var crouseInfo = scheduleInfo[i];
                             var day = crouseInfo.day;
@@ -229,31 +268,81 @@ pageEncoding="utf-8"%>
                 }
             </STYLE>
 
+            <div>
+                <select id="classlist" onchange="GetSchedule()">
+                </select>
+            </div>
+
+            <div>
+                <select id="crouselist" onchange="GetCrouseList()">
+                    <option>公共课</option>
+                    <option>计算机科学与技术</option>
+                </select>
+            </div>
+
             <div style="width:700px;">
                 <DIV style="width:700px;float:left;">
                     <DIV class="left">
-                        <TABLE>
+                        <table id="common" style="display:none">
+                            <TR>
+                                <TD>
+                                    <DIV class="item">高等数学</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">线性代数</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">概率论与数理统计</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">政治</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">英语</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">计算机应用基础</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">体育</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">中国特色社会主义概论</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">思想道德修养与法律基础</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">中国现代史纲要</DIV>
+                                </TD>
+                            </TR>
+                            <TR>
+                                <TD>
+                                    <DIV class="item">马克思主义基本原理</DIV>
+                                </TD>
+                            </TR>
+                        </table>
+                        <TABLE id="sci" style="display:none">
                             <TBODY>
-                                <TR>
-                                    <TD>
-                                        <DIV class="item">高等数学</DIV>
-                                    </TD>
-                                </TR>
-                                <TR>
-                                    <TD>
-                                        <DIV class="item">线性代数</DIV>
-                                    </TD>
-                                </TR>
-                                <TR>
-                                    <TD>
-                                        <DIV class="item">概率论与数理统计</DIV>
-                                    </TD>
-                                </TR>
-                                <TR>
-                                    <TD>
-                                        <DIV class="item">政治</DIV>
-                                    </TD>
-                                </TR>
+
                                 <TR>
                                     <TD>
                                         <DIV class="item">数据结构</DIV>
@@ -504,10 +593,25 @@ pageEncoding="utf-8"%>
                     }, //这里是传进去的参数  
                     dataType: "text",
                     success: function(data) {
-                        if (data == "SUCCEEDED")
+                        if (data == "SUCCEEDED") {
+                            sessionStorage.preSelectedIndex = document.getElementById("classlist").selectedIndex;
+                            sessionStorage.preCrouseIndex = document.getElementById("crouselist").selectedIndex;
                             window.location.reload();
+                        }
                     }
                 });
+            }
+
+            function GetCrouseList() {
+                var list = document.getElementById("crouselist");
+                var index = list.selectedIndex; // 选中索引
+                if (index == 0) {
+                    document.getElementById("common").style.display = "";
+                    document.getElementById("sci").style.display = "none";
+                } else {
+                    document.getElementById("common").style.display = "none";
+                    document.getElementById("sci").style.display = "";
+                }
             }
         </script>
         <SCRIPT>

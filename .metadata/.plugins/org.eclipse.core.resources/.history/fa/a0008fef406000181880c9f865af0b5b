@@ -1,0 +1,9 @@
+package servlet;
+
+public class SendInfoServlet {
+
+	public SendInfoServlet() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

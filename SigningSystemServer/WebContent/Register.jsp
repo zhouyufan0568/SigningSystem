@@ -169,8 +169,15 @@ pageEncoding="utf-8"%>
                     }, //这里是传进去的参数  
                     dataType: "text",
                     success: function(data) {
-                        if (data == "SUCCEEDED")
+                        var infos = data.split(":")[1];
+                        if (infos != "null") {
+                            var info = infos.split(",");
+                            sessionStorage.id = info[0];
+                            sessionStorage.username = info[1];
+                            sessionStorage.sex = info[2];
+                            sessionStorage.classname = info[3];
                             window.location.href = "http://localhost:5716/SigningSystemServer/Login.jsp";
+                        }
                     }
                 });
             }

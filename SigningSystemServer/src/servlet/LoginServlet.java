@@ -33,8 +33,11 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)   
             throws ServletException, IOException {  
         // 返回字符串    
-        String responseMsg="FAILED";    
+        String res = null;    
         // 输出流    
+        response.setHeader("Content-type", "text/html;charset=UTF-8");
+    	response.setCharacterEncoding("UTF-8"); 
+    	response.setContentType("text/xml;charset=UTF-8");
         PrintWriter out = response.getWriter();    
         // 设置编码形式    
         request.setCharacterEncoding("utf-8");      
@@ -45,12 +48,15 @@ public class LoginServlet extends HttpServlet {
         System.out.println("id:" + id + " --try to login");  
     
         // 访问数据库    
-        int value = MyService.login(id, password, usertype);  
-        if(value == LOGIN_SUCCEEDED) {    
-            responseMsg = "SUCCEEDED";    
-        }  
-        System.out.println("login servlet responseMsg:" + responseMsg);    
-        out.print(responseMsg);  
+        res = MyService.login(id, password, usertype);  
+        if(res != null) {    
+        	System.out.println("login success");    
+        }else {
+        	System.out.println("login failed"); 
+        }
+        res = "loginInfo:" + res;
+        System.out.println("login servlet responseMsg:" + res);    
+        out.print(res);  
     }  
 
 }
