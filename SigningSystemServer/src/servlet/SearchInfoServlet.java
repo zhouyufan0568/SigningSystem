@@ -42,12 +42,13 @@ private static final long serialVersionUID = 1L;
         // 设置编码形式    
         // 获取传入数据    
         String info = request.getParameter("info");  
+        String major = request.getParameter("major"); 
         String id = request.getParameter("id");  
         String usertype = request.getParameter("usertype");
         System.out.println("user: "+id+" info:" + info + " --try to search info");  
         
         // 访问数据库    
-        res = MyService.searchInfo(id, usertype, info);
+        res = MyService.searchInfo(id, usertype, info, major);
         if(res != null) {
         	System.out.println("searchinfo servlet response: NOT NULL"); 
         	res = info + ":" + res;

@@ -33,6 +33,8 @@ public class MyService {
     static int GETCROUSE_SUCCEEDED = 9;
     static int SETINFO_SUCCEEDED = 10;
     static int SETINFO_FAILED = 11;
+    static int MODIFY_SUCCEEDED = 12;
+    static int MODIFY_FAILED = 13;
 
 	public static String login(String id, String password, String usertype) {
 		int result = LOGIN_FAILED;
@@ -259,7 +261,7 @@ public class MyService {
 		return list;
 	}
 
-	public static String searchInfo(String id, String usertype, String info) {
+	public static String searchInfo(String id, String usertype, String info, String major) {
 		// TODO Auto-generated method stub
 		StringBuilder res = new StringBuilder();
 		resultSet = null;
@@ -267,7 +269,7 @@ public class MyService {
 		String sql = null;
 		switch (info) {
 			case "classname":{
-				sql = "select distinct class from class_schedule";
+				sql = "select major from major_list";
 				break;
 			}
 			case "username":{
@@ -286,6 +288,10 @@ public class MyService {
 				}
 				break;
 			}
+			case "majorclass":{
+				sql = "select class from major_class where major='" + major + "'";
+				break;
+			}
 			default:{
 				sql = "select distinct class from class_schedule";
 				break;
@@ -300,8 +306,8 @@ public class MyService {
 				while (resultSet.next()) {
 					switch (info) {
 						case "classname":{
-							res.append(resultSet.getString("class")+",");
-							System.out.println("Search 1 raw: classname: " + resultSet.getString("class"));
+							res.append(resultSet.getString("major")+",");
+							System.out.println("Search 1 raw: classname: " + resultSet.getString("major"));
 							break;
 						}
 						case "username":{
@@ -322,11 +328,18 @@ public class MyService {
 							}
 							break;
 						}
+						case "majorclass":{
+							res.append(resultSet.getString("class")+",");
+							System.out.println("Search 1 raw: crousename: " + resultSet.getString("class"));
+							break;
+						}
 						default:
 							break;
 					}
 				}
-				res.setLength(res.length()-1);
+				if(res.length() != 0) {
+					res.setLength(res.length()-1);
+				}
 				System.out.println("SearchInfo res: "+res.toString());
 				preparedStatement.close();
 				con.close();
@@ -418,5 +431,51 @@ public class MyService {
 		}
 		
 		return res;
+	}
+
+	public static int ModifyMajorOrClass(String id, String usertype, String addordel, String majororclass,
+			String majorName, String className) {
+		// TODO Auto-generated method stub
+		int result = MODIFY_SUCCEEDED;
+		String sql = null;
+		try {
+			Connection con = DBManager.getConnection();
+			if(addordel.equals("add")) {
+				if(majororclass.equals("major")) {
+					sql = "insert into major_list(major) values(?)";
+				}else if(majororclass.equals("class")) {
+					sql = "insert into major_class(major,class) values(?,?)";
+				}
+			}else if(addordel.equals("del")){
+				if(majororclass.equals("major")) {
+					sql = "delete from major_list where major=?";
+				}else if(majororclass.equals("class")) {
+					sql = "delete from major_class where major=? and class=?";
+				}
+			}
+			preparedStatement = con.prepareStatement(sql);
+			if(majororclass.equals("major")) {
+				preparedStatement.setString(1, majorName);
+			}else if(majororclass.equals("class")) {
+				preparedStatement.setString(1, majorName);
+				preparedStatement.setString(2, className);
+			}
+			updateRowCnt = preparedStatement.executeUpdate();
+			System.out.println(sql);
+			// ²åÈë½á¹û
+			if (updateRowCnt != 0) {
+				System.out.println(usertype + " " + id + " -- has modified " + majororclass);
+			} else {
+				result = MODIFY_FAILED;
+				System.out.println("Update failed -- mysql: update 0 raw");
+			}
+			preparedStatement.close();
+			con.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 }
